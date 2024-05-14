@@ -1,10 +1,23 @@
 body {
-    padding: 0;
     justify-content: center;
     display: flex;
-    text-align: center;
     background-image: url(../images/pasture.jpeg);
-    
+    height: 900px;
+}
+
+main {
+    height: 900px;
+    width: 825px;
+}
+
+h1 {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 40px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 70px;
 }
 
 div {
@@ -12,72 +25,81 @@ div {
 }
 
 #carrot-icon {
-    height: 60px;
-    padding: 10px;
+    height: 65px;
+    animation-name: spin;
+    animation-duration: 3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
-
-h1 {
-    font-family: 'Courier New', Courier, monospace;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding-bottom: 15px;
-}
-
-
-/* main {
-    height: 775px;
-    width: 850px;
-} */
 
 #game-intro {
-    /* padding: 20px 0px; */
-    background-image: url(../images/Start\ Screen.jpg);
+    background-image: url(../images/Start_Screen.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     height: 750px;
     width: 825px;
-    justify-content: center;
-    /* display: flex; */
-    align-items: center;
     display: flex;
-
-}
-
-#play-button {
-    height: 125px;
-    margin-bottom: 200px;
-    padding-left: 30px;
-}
-
-#game-container {
-    height: 750px;
-    width: 825px;
-    display: none;
     justify-content: center;
-    background-image: url(../images/Game\ Screen.jpg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+    align-items: center;
     /* display: none; */
 }
 
-/* #game-screen {
-    display: none;
-    align-items: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(../images/Game\ Screen.jpg);
-    height: 700px;
-    width: 900px;
-    display: flex;
-    justify-content: center;
+#play-button {
+    height: 90px;
+    margin-bottom: 200px;
+    margin-left: 15px;
+    padding: 0px;
+}
+
+/* @keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 } */
 
 
+ #game-container {
+    height: 830px;
+    width: 825px;
+    display: none ;
+    justify-content: center;
+    align-items: center;
 
-#game-end {
 
+ } 
+
+ #game-screen {
+    height: 750px;
+    width: 825px;
+    display: none;
+    justify-content: center;
+    background-image: url(../images/Game_Screen.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 30px;
+    margin: 0;
+    height: 60px;
+    padding: 0 20px;
+} 
+
+.item {
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    bottom: 120px;
+    left: 500px
 }
