@@ -59,7 +59,7 @@ div {
     to {
         transform:rotate(360deg);
     }
-} */
+}  */
 
 
  #game-container {
@@ -68,8 +68,6 @@ div {
     display: none ;
     justify-content: center;
     align-items: center;
-
-
  } 
 
  #game-screen {
@@ -81,6 +79,8 @@ div {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    
+    
 }
 
 #stats {
@@ -97,9 +97,79 @@ h2 {
 } 
 
 .item {
-    width: 30%;
-    height: 30%;
+    width: 325px;
+    height: 200px;
+    /* position: absolute; */
+    /* position: fixed; */
+    /* bottom: 140px; */
+}
+
+.carrot {
+    width: 350px;
+    height: 200px;
+    /* position: absolute;
+    position: fixed; */
+    /* bottom: 145px; */
+}
+
+#item-container {
+    margin-top: -200px;
+    margin-left: -5%;
+    width: 373px;
+    height: 200px;
+    bottom: 150px;
+    position: fixed;
+    align-items: center;
+    overflow-x: hidden;
+
+}
+
+.slide-out {
     position: absolute;
-    bottom: 120px;
-    left: 500px
+    animation: slideout 2s linear 1
+}
+
+
+@keyframes slideout {
+
+    0% {
+      left: 0%;
+    }
+
+    50% {
+        left: 100%;
+    }
+ 
+    100% {
+      left: 200%;
+    }
+
+  }
+
+  #end-container {
+    height: 830px;
+    width: 825px;
+    display: none ;
+    justify-content: center;
+    align-items: center;
+ } 
+
+ #win-lose {
+    height: 750px;
+    width: 825px;
+    display: none;
+    justify-content: center;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;  
+}
+
+ #final-stats {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#final-score {
+    font-size: 50px;
 }

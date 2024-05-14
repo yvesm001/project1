@@ -3,13 +3,19 @@ class Game {
         this.gameScreen = document.querySelector("#game-screen");
         this.gameContainer = document.querySelector("#game-container");
         this.gameIntro = document.querySelector("#game-intro");
-        this.gameEnd = document.querySelector("#game-end");
+        this.gameEnd = document.querySelector("#end-container");
+        this.winOrLose = document.querySelector("#win-lose");
         this.rabbit;
         this.carrot;
         this.item ;
         this.height = height;
         this.width = width;
         this.items = [];
+        this.livesDisplay = document.querySelector("#lives");
+        this.lives = 3;
+        this.score = 0;
+        this.scoreDisplay = document.querySelector("#score");
+        this.finalMessage = document.querySelector('#final-score');
       }
 
       //Start a new game
@@ -21,6 +27,61 @@ class Game {
     
           this.initializeItems();
           this.newItem()
+
+          document.addEventListener('keydown', (e) => {
+
+            //If current item is non-carrot
+            if (this.item.className === 'item') {
+
+                //If player feeds non-carrot
+                if (e.key === "ArrowRight") {
+                    console.log("Not a carrot, you lost a life :(");
+                    this.item.classList.toggle('slide-out');
+                    setTimeout(() => {
+                      this.removeItem();
+                      this.newItem();
+                    }, 1990)
+                    //Checking lives and ending game if no lives left
+                    if (this.lives <= 1) {
+                        this.lives = 0
+                        this.livesDisplay.innerText = `Lives:${this.lives}`;
+                        setTimeout(() => {
+                          console.log("game over");
+                          this.endGame();
+                        }, 1991)
+                    //Lowering lives and producing next item
+                    } else {
+                        this.lives--;
+                        this.livesDisplay.innerText = `Lives:${this.lives}`;
+                    }     
+                }
+                if (e.key === "ArrowDown") {
+                    console.log("Correct");
+                    // this.scoreDisplay.innerText = `Score:${this.score}`;
+                    this.removeItem();
+                    this.newItem();
+                }
+            //If current item is carrot
+            } else {
+                //If player throws carrot out
+                if (e.key === "ArrowDown") {
+                    console.log("You threw out a carrot");
+                    this.removeItem();
+                    this.newItem();
+                }
+                //If player feeds carrot
+                if (e.key === "ArrowRight") {
+                    this.item.classList.toggle('slide-out');
+                    console.log("Eating carrot");
+                    this.score += 10;
+                    this.scoreDisplay.innerText = `Score:${this.score}`;
+                    setTimeout(() => {
+                        this.removeItem();
+                          this.newItem();
+                        }, 1990)
+                    } 
+                }
+          })
       }
       //Generate 0 or 1 to determine carrot (0) or non-carrot (1)
       getRandomNum() {
@@ -96,5 +157,29 @@ class Game {
         //Reveal the image
         this.item.style.display = "block";
       }
+
+      removeItem() {
+        console.log("This is this.item", this.item.parentNode)
+        this.item.parentNode.remove()
+        this.item.remove();
+        console.log("Are we reaching item remove?")
+      }
+
+      endGame() {
+        this.gameContainer.style.display = "none";
+        this.gameScreen.style.display = "none";
+        this.gameEnd.style.display = "flex";
+        this.gameEnd.style.display = "flex";
+        this.gameEnd.style.flexWrap = "wrap";
+        this.winOrLose.style.display = "flex";
+        if (this.score < 100) {
+            this.winOrLose.style.backgroundImage = "url('lose_screen.jpg')";
+            this.finalMessage.innerText = `GAME OVER`;
+        } else {
+            this.winOrLose.style.backgroundImage = "url('win_screen.jpg')"
+            this.finalMessage.innerText = `FINAL SCORE:${this.score}`;
+        }
+      }
     }
+    
     
