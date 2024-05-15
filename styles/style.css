@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
 body {
     justify-content: center;
     display: flex;
     background-image: url(../images/pasture.jpeg);
     height: 900px;
+    font-family:'Courier New', Courier, monospace;
+    
 }
 
 main {
@@ -11,13 +16,13 @@ main {
 }
 
 h1 {
-    font-family:'Courier New', Courier, monospace;
     font-size: 40px;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     height: 70px;
+    letter-spacing: 4px;
 }
 
 div {
@@ -85,18 +90,20 @@ div {
 
 #stats {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
 }
 
 h2 {
-    font-family:'Courier New', Courier, monospace;
     font-size: 30px;
-    margin: 0;
+    margin: 0px 50px;
     height: 60px;
-    padding: 0 20px;
+    padding: 0px;
+    
 } 
 
 .item {
+    padding-top: 29px;
     width: 325px;
     height: 200px;
     /* position: absolute; */
@@ -105,6 +112,7 @@ h2 {
 }
 
 .carrot {
+    padding-top: 28px;
     width: 350px;
     height: 200px;
     /* position: absolute;
@@ -112,15 +120,22 @@ h2 {
     /* bottom: 145px; */
 }
 
+#bat {
+    margin-top: 45px;
+    width: 320px;
+    height: 110px;
+}
+
 #item-container {
-    margin-top: -200px;
+    margin-top: 520px;
     margin-left: -5%;
     width: 373px;
-    height: 200px;
-    bottom: 150px;
-    position: fixed;
+    height: 250px;
+    bottom: 125px;
+    position: absolute;
     align-items: center;
     overflow-x: hidden;
+    overflow: hidden;
 
 }
 
@@ -145,6 +160,27 @@ h2 {
     }
 
   }
+
+  .slide-in {
+    position: absolute;
+    animation: slidein 1s linear;
+  }
+
+  @keyframes slidein {
+    0% {
+        top: 0%;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: 200%;
+    }
+  }
+
+
 
   #end-container {
     height: 830px;
@@ -172,4 +208,21 @@ h2 {
 
 #final-score {
     font-size: 50px;
+    letter-spacing: 4px;
+}
+
+#feedback-container {
+    width: 325px;
+    height: 200px;
+    margin-right: 500px;
+    margin-top: 400px;
+    margin-left: 430px;
+    position: absolute;
+}
+
+#feedback {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    padding-left: 50px;
 }
