@@ -26,9 +26,7 @@ class Game {
     this.feedback.setAttribute("id", "feedback");
     this.feedbackContainer.appendChild(this.feedback);
     this.feedback.style.visibility = "hidden";
-    let music = document.createElement("AUDIO");
-    music.setAttribute("src", "music.mp3");
-    music.setAttribute("autoplay", true);
+    let music = new Audio("music.mp3");
     music.volume = 0.04;
     document.body.appendChild(music);
   }
