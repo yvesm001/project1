@@ -30,6 +30,8 @@ class Game {
     music.setAttribute("src", "music.mp3");
     music.setAttribute("autoplay", true);
     music.volume = 0.04;
+    let body = document.getElementsByTagName('body');
+    body.appendChild(music);
   }
 
   //Start a new game
