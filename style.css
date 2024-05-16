@@ -1,7 +1,7 @@
 body {
     justify-content: center;
     display: flex;
-    background-image: url(/pasture.jpeg);
+    background-image: url(pasture.jpeg);
     height: 900px;
     font-family:'Courier New', Courier, monospace;
 }
@@ -34,7 +34,7 @@ div {
 }
 
 #game-intro {
-    background-image: url(/start_screen.jpg);
+    background-image: url(start_screen.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -75,7 +75,7 @@ div {
     width: 825px;
     display: none;
     justify-content: center;
-    background-image: url(/Game_Screen.jpg);
+    background-image: url(Game_Screen.jpg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
