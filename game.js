@@ -26,9 +26,11 @@ class Game {
     this.feedback.setAttribute("id", "feedback");
     this.feedbackContainer.appendChild(this.feedback);
     this.feedback.style.visibility = "hidden";
-    let music = new Audio("music.mp3");
-    music.volume = 0.04;
-    document.body.appendChild(music);
+    this.music = new Audio("music.mp3");
+    this.music.volume = 0.04;
+    document.body.appendChild(this.music);
+    
+    
   }
 
   //Start a new game
@@ -41,6 +43,8 @@ class Game {
     this.initializeItems();
     this.newItem();
     this.timeCountdown();
+    this.music.play();
+    
 
     
 
