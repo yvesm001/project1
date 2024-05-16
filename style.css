@@ -12,12 +12,14 @@ main {
 }
 
 h1 {
+    padding-top: 10px;
+    padding-bottom: 5px;
     font-size: 40px;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 70px;
+    height: 85px;
     letter-spacing: 4px;
 }
 
@@ -105,6 +107,7 @@ h2 {
     padding-top: 29px;
     width: 350px;
     height: 200px;
+    
 }
 
 #bat {
@@ -114,11 +117,11 @@ h2 {
 }
 
 #item-container {
-    margin-top: 520px;
-    margin-left: -5%;
+    /* margin-top: 520px; */
+    margin-left: -4.5%;
     width: 373px;
     height: 250px;
-    bottom: 125px;
+    bottom: 93px;
     position: absolute;
     align-items: center;
     overflow: hidden;
@@ -205,4 +208,8 @@ h2 {
     height: 150px;
     position: absolute;
     padding-left: 50px;
+}
+
+#buffet-text {
+    width: 350px;
 }
