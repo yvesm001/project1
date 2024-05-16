@@ -29,7 +29,7 @@ class Game {
     let music = document.createElement('audio');
     music.setAttribute("src", "music.mp3");
     music.setAttribute("autoplay", true);
-    music.volume = 0.05;
+    music.volume = 0.04;
   }
 
   //Start a new game
@@ -43,8 +43,9 @@ class Game {
     this.newItem();
     this.timeCountdown();
 
+    
 
-    document.addEventListener("keydown", (e) => {
+    let listener = document.addEventListener("keydown", (e) => {
       //If current item is non-carrot
       if (this.item.className === "item") {
         //If player feeds non-carrot
@@ -75,8 +76,6 @@ class Game {
           console.log("Tossed");
           this.item.classList.toggle("slide-in");
           this.playSound("toss");
-        //   this.removeItem();
-        //   this.newItem();
         setTimeout(() => {
             this.removeItem();
             this.newItem();
@@ -89,8 +88,6 @@ class Game {
           console.log("Tossed");
           this.item.classList.toggle("slide-in");
           this.playSound("toss");
-        //   this.removeItem();
-        //   this.newItem();
         setTimeout(() => {
             this.removeItem();
             this.newItem();
@@ -110,8 +107,7 @@ class Game {
           }, 1900);
         }
       }
-    });
-
+    })
   }
   //Generate 0 or 1 to determine carrot (0) or non-carrot (1)
   getRandomNum() {
