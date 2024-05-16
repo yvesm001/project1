@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-
-
 body {
     justify-content: center;
     display: flex;
-    background-image: url(../images/pasture.jpeg);
+    background-image: url(/pasture.jpeg);
     height: 900px;
     font-family:'Courier New', Courier, monospace;
-    
 }
 
 main {
@@ -38,7 +34,7 @@ div {
 }
 
 #game-intro {
-    background-image: url(../images/Start_Screen.jpg);
+    background-image: url(/start_screen.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -47,7 +43,6 @@ div {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* display: none; */
 }
 
 #play-button {
@@ -80,12 +75,10 @@ div {
     width: 825px;
     display: none;
     justify-content: center;
-    background-image: url(../images/Game_Screen.jpg);
+    background-image: url(/Game_Screen.jpg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    
-    
 }
 
 #stats {
@@ -105,19 +98,13 @@ h2 {
 .item {
     padding-top: 29px;
     width: 325px;
-    height: 200px;
-    /* position: absolute; */
-    /* position: fixed; */
-    /* bottom: 140px; */
+    height: 200px; 
 }
 
 .carrot {
-    padding-top: 28px;
+    padding-top: 29px;
     width: 350px;
     height: 200px;
-    /* position: absolute;
-    position: fixed; */
-    /* bottom: 145px; */
 }
 
 #bat {
@@ -134,9 +121,7 @@ h2 {
     bottom: 125px;
     position: absolute;
     align-items: center;
-    overflow-x: hidden;
     overflow: hidden;
-
 }
 
 .slide-out {
@@ -144,9 +129,7 @@ h2 {
     animation: slideout 2s linear 1
 }
 
-
 @keyframes slideout {
-
     0% {
       left: 0%;
     }
@@ -158,7 +141,6 @@ h2 {
     100% {
       left: 200%;
     }
-
   }
 
   .slide-in {
@@ -179,8 +161,6 @@ h2 {
         top: 200%;
     }
   }
-
-
 
   #end-container {
     height: 830px;

@@ -18,14 +18,18 @@ class Game {
     this.items = [];
     this.lives = 3;
     this.score = 0;
-    this.seconds = 40;
+    this.seconds = 1000;
     this.feedback = document.createElement("img");
     this.feedbackContainer = document.createElement("div");
     this.feedbackContainer.setAttribute("id", "feedback-container");
     this.gameScreen.appendChild(this.feedbackContainer);
     this.feedback.setAttribute("id", "feedback");
     this.feedbackContainer.appendChild(this.feedback);
-    this.feedback.style.visibility = "hidden"
+    this.feedback.style.visibility = "hidden";
+    let music = document.createElement('audio');
+    music.setAttribute("src", "music.mp3");
+    music.setAttribute("autoplay", true);
+    music.volume = 0.05;
   }
 
   //Start a new game
@@ -39,7 +43,8 @@ class Game {
     this.newItem();
     this.timeCountdown();
 
-    let listener = document.addEventListener("keydown", (e) => {
+
+    document.addEventListener("keydown", (e) => {
       //If current item is non-carrot
       if (this.item.className === "item") {
         //If player feeds non-carrot
@@ -106,6 +111,7 @@ class Game {
         }
       }
     });
+
   }
   //Generate 0 or 1 to determine carrot (0) or non-carrot (1)
   getRandomNum() {
@@ -196,8 +202,11 @@ class Game {
     this.gameEnd.style.display = "flex";
     this.gameEnd.style.flexWrap = "wrap";
     this.winOrLose.style.display = "flex";
-    if (this.score < 100) {
+    if (this.score < 100 && this.lives <= 0) {
       this.winOrLose.style.backgroundImage = "url('lose_screen.jpg')";
+      this.finalMessage.innerText = `GAME OVER`;
+    } else if (this.score < 100 && this.lives > 0){
+      this.winOrLose.style.backgroundImage = "url('times_up.jpg')";
       this.finalMessage.innerText = `GAME OVER`;
     } else {
       this.winOrLose.style.backgroundImage = "url('win_screen.jpg')";
@@ -222,6 +231,7 @@ class Game {
   playSound(item) {
     if (this.gameOver === false) {
       let sound = document.createElement("audio");
+      sound.volume = 0.25;
         if (item === "toss") {
         sound.setAttribute("src", "cartoon_throw_trimmed.mp3");
         sound.setAttribute("autoplay", true);
