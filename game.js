@@ -26,12 +26,11 @@ class Game {
     this.feedback.setAttribute("id", "feedback");
     this.feedbackContainer.appendChild(this.feedback);
     this.feedback.style.visibility = "hidden";
-    let music = document.createElement('audio');
+    let music = document.createElement("AUDIO");
     music.setAttribute("src", "music.mp3");
     music.setAttribute("autoplay", true);
     music.volume = 0.04;
-    let body = document.getElementsByTagName('body');
-    body.appendChild(music);
+    document.body.appendChild(music);
   }
 
   //Start a new game
