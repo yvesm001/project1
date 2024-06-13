@@ -2,13 +2,16 @@ body {
     justify-content: center;
     display: flex;
     background-image: url('pasture.jpeg');
-    height: 900px;
-    font-family:'Courier New', Courier, monospace;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
 }
 
 main {
-    height: 900px;
-    width: 825px;
+    height: 100vh;
+    width: 100%;
+    max-width: 825px;
+    margin: 0 auto;
 }
 
 h1 {
@@ -40,11 +43,13 @@ div {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height: 750px;
-    width: 825px;
+    height: 75vh;
+    width: 100%;
+    max-width: 825px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 
 #play-button {
@@ -61,20 +66,22 @@ div {
     to {
         transform:rotate(360deg);
     }
-}  */
+} */
 
-
- #game-container {
-    height: 830px;
-    width: 825px;
-    display: none ;
+#game-container {
+    height: 90vh;
+    width: 100%;
+    max-width: 825px;
+    display: none;
     justify-content: center;
     align-items: center;
- } 
+    margin: 0 auto;
+}
 
- #game-screen {
-    height: 750px;
-    width: 825px;
+#game-screen {
+    height: 75vh;
+    width: 100%;
+    max-width: 825px;
     display: none;
     justify-content: center;
     background-image: url('Game_Screen.jpg');
@@ -94,20 +101,18 @@ h2 {
     margin: 0px 50px;
     height: 60px;
     padding: 0px;
-    
-} 
+}
 
 .item {
     padding-top: 29px;
     width: 325px;
-    height: 200px; 
+    height: 200px;
 }
 
 .carrot {
     padding-top: 29px;
     width: 350px;
     height: 200px;
-    
 }
 
 #bat {
@@ -121,7 +126,7 @@ h2 {
     margin-left: -4%;
     width: 373px;
     height: 250px;
-    bottom: 93px;
+    bottom: 117px;
     position: absolute;
     align-items: center;
     overflow: hidden;
@@ -129,61 +134,60 @@ h2 {
 
 .slide-out {
     position: absolute;
-    animation: slideout 2s linear 1
+    animation: slideout 2s linear 1;
 }
 
 @keyframes slideout {
     0% {
-      left: 0%;
+        left: 0%;
     }
-
     50% {
         left: 100%;
     }
- 
     100% {
-      left: 200%;
+        left: 200%;
     }
-  }
+}
 
-  .slide-in {
+.slide-in {
     position: absolute;
     animation: slidein 1s linear;
-  }
+}
 
-  @keyframes slidein {
+@keyframes slidein {
     0% {
         top: 0%;
     }
-
     50% {
         top: 100%;
     }
-
     100% {
         top: 200%;
     }
-  }
+}
 
-  #end-container {
-    height: 830px;
-    width: 825px;
-    display: none ;
+#end-container {
+    height: 90vh;
+    width: 100%;
+    max-width: 825px;
+    display: none;
     justify-content: center;
     align-items: center;
- } 
+    margin: 0 auto;
+}
 
- #win-lose {
-    height: 750px;
-    width: 825px;
+#win-lose {
+    height: 75vh;
+    width: 100%;
+    max-width: 825px;
     display: none;
     justify-content: center;
     background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;  
+    background-repeat: no-repeat;
 }
 
- #final-stats {
+#final-stats {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -213,4 +217,72 @@ h2 {
 #buffet-text {
     width: 350px;
     height: 129.27px;
+}
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    main {
+        height: 100%;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 24px;
+        height: auto;
+        padding: 10px;
+    }
+
+    #game-intro, #game-container, #game-screen, #end-container, #win-lose {
+        height: 70vh;
+        width: 90%;
+        max-width: none;
+    }
+
+    .item, .carrot {
+        width: 80%;
+        height: auto;
+    }
+
+    #feedback-container {
+        width: 80%;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #feedback {
+        width: 100px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 0 20px;
+    }
+
+    .item, .carrot {
+        width: 70%;
+        height: auto;
+    }
+
+    #feedback {
+        width: 80px;
+        height: 60px;
+    }
+
+    #final-score {
+        font-size: 24px;
+    }
 }

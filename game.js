@@ -30,6 +30,12 @@ class Game {
     this.music.volume = 0.04;
     document.body.appendChild(this.music);
     this.isAnimating = false; // Flag to check if animation is in progress
+
+    // Variables for touch swipe detection
+    this.touchStartX = 0;
+    this.touchStartY = 0;
+    this.touchEndX = 0;
+    this.touchEndY = 0;
   }
 
   //Start a new game
@@ -44,80 +50,122 @@ class Game {
     this.timeCountdown();
     this.music.play();
 
-    document.addEventListener("keydown", (e) => {
-      if (this.isAnimating) return;
+    document.addEventListener("keydown", (e) => this.handleInput(e));
 
-      //If current item is non-carrot
-      if (this.item.className === "item") {
-        //If player feeds non-carrot
-        if (e.key === "ArrowRight") {
-          this.isAnimating = true;
-          this.giveFeedback("wrong");
-          console.log("Not a carrot, you lost a life :(");
-          this.playSound(this.item.id);
-          this.item.classList.toggle("slide-out");
-          setTimeout(() => {
-            this.removeItem();
-            this.newItem();
-            this.isAnimating = false;
-          }, 1900);
-          //Checking lives and ending game if no lives left
-          if (this.lives <= 1) {
-            this.lives = 0;
-            this.livesDisplay.innerText = `Lives:${this.lives}`;
-            setTimeout(() => {
-              console.log("game over");
-              this.endGame();
-            }, 1901);
-            //Lowering lives and producing next item
-          } else {
-            this.lives--;
-            this.livesDisplay.innerText = `Lives:${this.lives}`;
-          }
-        }
-        if (e.key === "ArrowDown") {
-          this.isAnimating = true;
-          console.log("Tossed");
-          this.item.classList.toggle("slide-in");
-          this.playSound("toss");
-          setTimeout(() => {
-            this.removeItem();
-            this.newItem();
-            this.isAnimating = false;
-          }, 900);
-        }
-        //If current item is carrot
-      } else {
-        //If player throws carrot out
-        if (e.key === "ArrowDown") {
-          this.isAnimating = true;
-          console.log("Tossed");
-          this.item.classList.toggle("slide-in");
-          this.playSound("toss");
-          setTimeout(() => {
-            this.removeItem();
-            this.newItem();
-            this.isAnimating = false;
-          }, 900);
-        }
-        //If player feeds carrot
-        if (e.key === "ArrowRight") {
-          this.isAnimating = true;
-          this.giveFeedback("correct");
-          this.item.classList.toggle("slide-out");
-          console.log("Eating carrot");
-          this.playSound("carrot");
-          this.score += 10;
-          this.scoreDisplay.innerText = `Score:${this.score}`;
-          setTimeout(() => {
-            this.removeItem();
-            this.newItem();
-            this.isAnimating = false;
-          }, 1900);
-        }
-      }
-    });
+    // Add event listeners for touch input
+    document.addEventListener("touchstart", (e) => this.handleTouchStart(e));
+    document.addEventListener("touchmove", (e) => this.handleTouchMove(e));
+    document.addEventListener("touchend", (e) => this.handleTouchEnd(e));
   }
+
+  // Handle keyboard input
+  handleInput(e) {
+    if (this.isAnimating) return;
+
+    if (this.item.className === "item") {
+      if (e.key === "ArrowRight") {
+        this.handleFeed();
+      }
+      if (e.key === "ArrowDown") {
+        this.handleToss();
+      }
+    } else {
+      if (e.key === "ArrowDown") {
+        this.handleToss();
+      }
+      if (e.key === "ArrowRight") {
+        this.handleFeed();
+      }
+    }
+  }
+
+  // Handle touch start
+  handleTouchStart(e) {
+    this.touchStartX = e.touches[0].clientX;
+    this.touchStartY = e.touches[0].clientY;
+  }
+
+  // Handle touch move
+  handleTouchMove(e) {
+    this.touchEndX = e.touches[0].clientX;
+    this.touchEndY = e.touches[0].clientY;
+  }
+
+  // Handle touch end
+  handleTouchEnd(e) {
+    const deltaX = this.touchEndX - this.touchStartX;
+    const deltaY = this.touchEndY - this.touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      // Horizontal swipe
+      if (deltaX > 50) {
+        // Swipe right
+        this.handleFeed();
+      }
+    } else {
+      // Vertical swipe
+      if (deltaY > 50) {
+        // Swipe down
+        this.handleToss();
+      }
+    }
+  }
+
+  handleFeed() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    if (this.item.className === "item") {
+      this.giveFeedback("wrong");
+      console.log("Not a carrot, you lost a life :(");
+      this.playSound(this.item.id);
+      this.item.classList.toggle("slide-out");
+      setTimeout(() => {
+        this.removeItem();
+        this.newItem();
+        this.isAnimating = false;
+      }, 1900);
+
+      if (this.lives <= 1) {
+        this.lives = 0;
+        this.livesDisplay.innerText = `Lives:${this.lives}`;
+        setTimeout(() => {
+          console.log("game over");
+          this.endGame();
+        }, 1901);
+      } else {
+        this.lives--;
+        this.livesDisplay.innerText = `Lives:${this.lives}`;
+      }
+    } else {
+      this.giveFeedback("correct");
+      this.item.classList.toggle("slide-out");
+      console.log("Eating carrot");
+      this.playSound("carrot");
+      this.score += 10;
+      this.scoreDisplay.innerText = `Score:${this.score}`;
+      setTimeout(() => {
+        this.removeItem();
+        this.newItem();
+        this.isAnimating = false;
+      }, 1900);
+    }
+  }
+
+  handleToss() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    console.log("Tossed");
+    this.item.classList.toggle("slide-in");
+    this.playSound("toss");
+    setTimeout(() => {
+      this.removeItem();
+      this.newItem();
+      this.isAnimating = false;
+    }, 900);
+  }
+
   //Generate 0 or 1 to determine carrot (0) or non-carrot (1)
   getRandomNum() {
     return Math.floor(Math.random() * 2);
