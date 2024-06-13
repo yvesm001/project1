@@ -29,8 +29,7 @@ class Game {
     this.music = new Audio("music.mp3");
     this.music.volume = 0.04;
     document.body.appendChild(this.music);
-    
-    
+    this.isAnimating = false; // Flag to check if animation is in progress
   }
 
   //Start a new game
@@ -44,15 +43,15 @@ class Game {
     this.newItem();
     this.timeCountdown();
     this.music.play();
-    
 
-    
+    document.addEventListener("keydown", (e) => {
+      if (this.isAnimating) return;
 
-    let listener = document.addEventListener("keydown", (e) => {
       //If current item is non-carrot
       if (this.item.className === "item") {
         //If player feeds non-carrot
         if (e.key === "ArrowRight") {
+          this.isAnimating = true;
           this.giveFeedback("wrong");
           console.log("Not a carrot, you lost a life :(");
           this.playSound(this.item.id);
@@ -60,6 +59,7 @@ class Game {
           setTimeout(() => {
             this.removeItem();
             this.newItem();
+            this.isAnimating = false;
           }, 1900);
           //Checking lives and ending game if no lives left
           if (this.lives <= 1) {
@@ -76,28 +76,33 @@ class Game {
           }
         }
         if (e.key === "ArrowDown") {
+          this.isAnimating = true;
           console.log("Tossed");
           this.item.classList.toggle("slide-in");
           this.playSound("toss");
-        setTimeout(() => {
+          setTimeout(() => {
             this.removeItem();
             this.newItem();
+            this.isAnimating = false;
           }, 900);
         }
         //If current item is carrot
       } else {
         //If player throws carrot out
         if (e.key === "ArrowDown") {
+          this.isAnimating = true;
           console.log("Tossed");
           this.item.classList.toggle("slide-in");
           this.playSound("toss");
-        setTimeout(() => {
+          setTimeout(() => {
             this.removeItem();
             this.newItem();
+            this.isAnimating = false;
           }, 900);
         }
         //If player feeds carrot
         if (e.key === "ArrowRight") {
+          this.isAnimating = true;
           this.giveFeedback("correct");
           this.item.classList.toggle("slide-out");
           console.log("Eating carrot");
@@ -107,10 +112,11 @@ class Game {
           setTimeout(() => {
             this.removeItem();
             this.newItem();
+            this.isAnimating = false;
           }, 1900);
         }
       }
-    })
+    });
   }
   //Generate 0 or 1 to determine carrot (0) or non-carrot (1)
   getRandomNum() {
@@ -204,7 +210,7 @@ class Game {
     if (this.score < 100 && this.lives <= 0) {
       this.winOrLose.style.backgroundImage = "url('lose_screen.jpg')";
       this.finalMessage.innerText = `GAME OVER`;
-    } else if (this.score < 100 && this.lives > 0){
+    } else if (this.score < 100 && this.lives > 0) {
       this.winOrLose.style.backgroundImage = "url('times_up.jpg')";
       this.finalMessage.innerText = `GAME OVER`;
     } else {
@@ -231,7 +237,7 @@ class Game {
     if (this.gameOver === false) {
       let sound = document.createElement("audio");
       sound.volume = 0.25;
-        if (item === "toss") {
+      if (item === "toss") {
         sound.setAttribute("src", "cartoon_throw_trimmed.mp3");
         sound.setAttribute("autoplay", true);
       } else {
@@ -249,7 +255,7 @@ class Game {
       setTimeout(function () {
         this.feedback.style.visibility = "hidden";
       }, 1000);
-    } 
+    }
     if (type === "correct") {
       this.feedback.style.visibility = "visible";
       this.feedback.setAttribute("src", "yum.png");
